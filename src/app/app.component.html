@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="alert alert-success" *ngIf="datasaved">
+    <strong>Success!</strong> Record Saved successfully !
+  </div>
+
+  <div class="card-block">
+    <div class="card-header text-center">
+      <h4>Book Store Application Form</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="bookform" (ngSubmit)="onFormSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+
+            <div class="form-group">
+              <label for="name">Book Name :</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter book name" formControlName="name">
+            </div>
+            <div class="form-group">
+              <label for="category">Category :</label>
+              <input type="text" class="form-control" id="category" placeholder="Enter category"
+                formControlName="category">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <input type="text" class="form-control" id="description" placeholder="Enter short description"
+                formControlName="description">
+            </div>
+            <div class="form-group">
+              <label for="writer">Writer :</label>
+              <input type="text" class="form-control" id="writer" placeholder="Enter writer name"
+                formControlName="writer">
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!bookform.valid">Submit</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-primary" (click)="resetForm()">Reset Form</button>
+      </form>
+    </div>
+    <div class="card-footer"></div>
+  </div>
+
+  <hr>
+  <div>
+    <h3>View Book Store Details </h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>BookName</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Writer</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of allbooks|async">
+          <td>{{book.id}}</td>
+          <td>{{book.name}}</td>
+          <td>{{book.category}}</td>
+          <td>{{book.description}}</td>
+          <td>{{book.writer}}</td>
+          <td><button class="btn btn-success" (click)="editBookStore(book.id)">Edit</button></td>
+          <td><button class="btn btn-danger" (click)="deleteBookfromStore(book.id)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
